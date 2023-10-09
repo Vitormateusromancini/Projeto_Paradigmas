@@ -78,4 +78,52 @@ A função recebe dois argumentos: preferencia (a preferência do usuário) e fi
 
 A linha let filmesFiltrados filtra a lista de filmes com base na preferência do usuário utilizando a função filter para manter apenas os filmes cujo gênero (convertido para minúsculas) contenha a preferência (também convertida para minúsculas). Isso cria uma nova lista chamada filmesFiltrados.
 
-Na rstrutura condicional  verifica se a lista filmesFiltrados está vazia. Se estiver vazia, significa que não há filmes que correspondam à preferência do usuário. Nesse caso, a função return é usada para retornar uma mensagem de que nenhuma recomendação foi encontrada. Mas caso a lista não estiver vazia com o else do é usada para executar a seguinte ação
+Na estrutura condicional  verifica se a lista filmesFiltrados está vazia. Se estiver vazia, significa que não há filmes que correspondam à preferência do usuário. Nesse caso, a função return é usada para retornar uma mensagem de que nenhuma recomendação foi encontrada. Mas caso a lista não estiver vazia com o else do é usada para executar a seguinte ação abaixo:
+
+
+```haskell
+(titulo, genero) <- escolherAleatorio filmesFiltrados
+            return (titulo, genero)
+```
+
+Esta linha chama a função escolherAleatorio para escolher aleatoriamente um filme da lista filmesFiltrados. Ela desestrutura a tupla retornada em (titulo, genero), onde titulo é o título do filme e genero é o gênero do filme escolhido aleatoriamente.
+
+A função return é usada para retornar uma tupla contendo o título e o gênero do filme recomendado
+
+```haskell
+gerarRecomendacaoLivro :: String -> [Book] -> IO (String, String)
+gerarRecomendacaoLivro preferencia livros = do
+    let livrosFiltrados = filter (\(_, genero) -> map toLower genero `contains` map toLower preferencia) livros
+    if null livrosFiltrados
+        then return ("Não encontramos nenhuma recomendação de livro com base no gênero de sua preferência.", "")
+        else do
+            (titulo, genero) <- escolherAleatorio livrosFiltrados
+            return (titulo, genero)
+```
+Esta função é parecida com a outra discutida anteriormente, a diferença é que ela gera uma recomendação de livro com base nos gêneros de preferência do usuário.
+
+```haskell
+escolherAleatorio :: [(String, String)] -> IO (String, String)
+escolherAleatorio lista = do
+    indice <- randomRIO (0, length lista - 1)
+    return (fst (lista !! indice), snd (lista !! indice))
+```
+Nesta função recebe uma lista de tuplas contendo duas strings (títulos e gêneros de filmes) e retorna uma ação de IO que produz uma tupla de duas strings (um título e um gênero).
+```haskell
+indice <- randomRIO (0, length lista - 1): 
+```
+Esta linha gera um número inteiro aleatório entre 0 e o tamanho da lista menos 1. A função randomRIO é usada para isso e retorna um número aleatório encapsulado em uma ação de IO. O resultado desse número aleatório é armazenado na variável indice.
+
+E no fim a linha return retorna uma tupla com os valores correspondentes ao índice aleatório gerado na lista de tuplas. A função fst extrai o primeiro elemento da tupla (o título) e snd extrai o segundo elemento (o gênero) do par selecionado aleatoriamente.
+```haskell
+contains :: Eq a => [a] -> [a] -> Bool
+contains [] _ = True
+contains _ [] = False
+contains (x:xs) (y:ys)
+    | x == y    = contains xs ys
+    | otherwise = contains (x:xs) ys
+```
+A função genérica que pode trabalhar com listas de qualquer tipo a, desde que esse tipo seja comparável (ou seja, pertença à classe Eq). Ela recebe duas listas e retorna um valor booleano (True se a primeira lista contém a segunda, caso contrário False).
+
+
+
