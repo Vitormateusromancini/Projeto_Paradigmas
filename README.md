@@ -74,3 +74,8 @@ gerarRecomendacaoFilme preferencia filmes = do
             (titulo, genero) <- escolherAleatorio filmesFiltrados
             return (titulo, genero)
 ```
+A função recebe dois argumentos: preferencia (a preferência do usuário) e filmes (uma lista de filmes). A função retorna uma ação de IO que produz uma tupla de duas strings, representando a recomendação de filme (título e gênero). 
+
+A linha let filmesFiltrados filtra a lista de filmes com base na preferência do usuário utilizando a função filter para manter apenas os filmes cujo gênero (convertido para minúsculas) contenha a preferência (também convertida para minúsculas). Isso cria uma nova lista chamada filmesFiltrados.
+
+Na rstrutura condicional  verifica se a lista filmesFiltrados está vazia. Se estiver vazia, significa que não há filmes que correspondam à preferência do usuário. Nesse caso, a função return é usada para retornar uma mensagem de que nenhuma recomendação foi encontrada. Mas caso a lista não estiver vazia com o else do é usada para executar a seguinte ação
