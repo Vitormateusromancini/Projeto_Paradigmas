@@ -39,3 +39,27 @@ testBookDatabase =
       ("Cem Anos de Solidão", "Realismo Mágico"),
       ("1984", "Distopia"),...]
 ```
+
+
+```haskell
+gerarRecomendacao :: String -> [Film] -> [Book] -> IO (String, String)
+```
+Ela recebe três argumentos: uma string que é a preferência do usuário, filmes (uma lista de filmes) e livros (uma lista de livros). A função retorna uma ação de IO que produz uma tupla de duas strings, representando a recomendação de filme e livro.
+
+```haskell
+    putStrLn "Você deseja uma recomendação de filme (F) ou livro (L)?"
+```
+ Esta linha exibe uma mensagem ao usuário perguntando se ele deseja uma recomendação de filme ou livro. A função putStrLn é usada para imprimir uma linha de texto no console.
+```haskell
+escolha <- getLine
+```
+Esta linha lê a entrada do usuário do console usando getLine e a armazena na variável escolha. O usuário deve inserir "F" para filme ou "L" para livro.
+
+
+```haskell
+case map toLower escolha of
+        "f" -> gerarRecomendacaoFilme preferencia filmes
+        "l" -> gerarRecomendacaoLivro preferencia livros
+        _   -> return ("Escolha inválida.", "")
+```
+Esta é uma estrutura de seleção case. Ela verifica o valor da variável escolha após converter tudo para letras minúsculas (usando map toLower). Isso garante que a comparação não seja sensível a maiúsculas/minúsculas e caso o valor não for nem "f" nem "l", a função return é usada para retornar uma tupla com uma mensagem de "Escolha inválida." para ambos os campos da recomendação.
