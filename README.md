@@ -62,4 +62,15 @@ case map toLower escolha of
         "l" -> gerarRecomendacaoLivro preferencia livros
         _   -> return ("Escolha inválida.", "")
 ```
-Esta é uma estrutura de seleção case. Ela verifica o valor da variável escolha após converter tudo para letras minúsculas (usando map toLower). Isso garante que a comparação não seja sensível a maiúsculas/minúsculas e caso o valor não for nem "f" nem "l", a função return é usada para retornar uma tupla com uma mensagem de "Escolha inválida." para ambos os campos da recomendação.
+Esta é uma estrutura de seleção case. Ela verifica o valor da variável escolha após converter tudo para letras minúsculas (usando map toLower). Isso garante que a comparação não seja sensível a maiúsculas/minúsculas. Se o valor for "f", a função gerarRecomendacaoFilme é chamada, passando a preferência do usuário e a lista de filmes. Isso resulta na geração de uma recomendação de filme. Se o valor for "l", a função gerarRecomendacaoLivro é chamada, passando a preferência do usuário e a lista de livros. Isso resulta na geração de uma recomendação de livro. caso o valor não for nem "f" nem "l", a função return é usada para retornar uma tupla com uma mensagem de "Escolha inválida." para ambos os campos da recomendação.
+
+```haskell
+gerarRecomendacaoFilme :: String -> [Film] -> IO (String, String)
+gerarRecomendacaoFilme preferencia filmes = do
+    let filmesFiltrados = filter (\(_, genero) -> map toLower genero `contains` map toLower preferencia) filmes
+    if null filmesFiltrados
+        then return ("Não encontramos nenhuma recomendação de filme com base no gênero de sua preferência.", "")
+        else do
+            (titulo, genero) <- escolherAleatorio filmesFiltrados
+            return (titulo, genero)
+```
