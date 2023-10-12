@@ -126,4 +126,32 @@ contains (x:xs) (y:ys)
 A função genérica que pode trabalhar com listas de qualquer tipo a, desde que esse tipo seja comparável (ou seja, pertença à classe Eq). Ela recebe duas listas e retorna um valor booleano (True se a primeira lista contém a segunda, caso contrário False).
 
 
+Contains [] _ = True: é a primeira cláusula da função e lida com o caso em que a primeira lista está vazia ([]). Nesse caso, a função retorna True independentemente do conteúdo da segunda lista, isso significa que uma lista vazia sempre "contém" outra lista (vazia ou não).
+
+contains _ [] = False: Esta é a segunda cláusula da função e lida com o caso em que a segunda lista está vazia ([]). Nesse caso, a função retorna False, pois uma lista não pode conter outra lista se a segunda estiver vazia.
+```haskell
+contains (x:xs) (y:ys)
+    | x == y    = contains xs ys
+    | otherwise = contains (x:xs) ys
+```
+Na primeira linha do código é a terceira cláusula da função e lida com o caso em que ambas as listas têm pelo menos um elemento verificando se o primeiro elemento (x) da primeira lista é igual ao primeiro elemento (y) da segunda lista. Se forem iguais, a função continua verificando os elementos restantes das duas listas chamando recursivamente a função contains com as caudas das listas (ou seja, xs e ys).
+
+E o otherwise = contains (x:xs) ys: tem como função analisar se os primeiros elementos das listas não forem iguais, esta cláusula é acionada (otherwise significa "caso contrário"). Nesse caso, a função continua verificando se a primeira lista ((x:xs)) contém a segunda lista (ys) ignorando o primeiro elemento da primeira lista (x) e mantendo a segunda lista inalterada.
+```haskell
+main :: IO ()
+main = do
+    putStrLn "Bem-vindo ao sistema de recomendação de filmes e livros!"
+    putStrLn "Por favor, insira o gênero de filme ou livro que você deseja:"
+    genero <- getLine
+    (titulo, generoRecomendado) <- gerarRecomendacao genero testFilmDatabase testBookDatabase
+    putStrLn "Recomendação:"
+    putStrLn ("Título: " ++ titulo)
+    putStrLn ("Gênero: " ++ generoRecomendado)
+```
+
+Por fim esta funçao é a função principal do código main :: IO () que está configurada para realizar ações de entrada e saída (IO). Os putStrLn  vão exibir as mensagensescritas neles, além de o genero <- getLine: que lê a entrada do usuário (o gênero desejado) do console e a armazena na variável genero.  O mesmo acontecendo com a função genero <- getLine: esta linha lê a entrada do usuário (o gênero desejado) do console e a armazena na variável genero.
+O testBookDatabase retorna uma tupla contendo o título e o gênero da recomendação gerada com base na preferência do usuário.
+Vale ressaltar para as duas últimas linhas que exibem o título de recomendação junto com o gênero da recomendação. 
+
+Sobre o trabalho foi bem desafiador usar a linguagem haskell comparado a Prolog já que eu não tinha mexido ainda com a linguagem com relação escolher aleatoriamente uma string numa lista. O principal desafio em questão foi resolver um problema de importação de biblioteca que foi resolvida com auxílio da professora. 
 
