@@ -1,7 +1,8 @@
 # Projeto Paradigmas
 
 O seguinte projeto é um trabalho da disciplina de paradgmas de programação na Universidade Federal de Santa Maria, o qual os discentes tinham que escolher um tema de projeto e uma linguagem de programação.	
-A proposta de produção individual será de um Mini Banco de dados de Livros e Filmes que recomendará entre um filme ou um livro para o usuário e a linguagem utilizada será Haskell. A partir de agora será explicado o código realizado pelo aluno Vitor Mateus Romancini do Amaral. link para o screencast: https://www.loom.com/share/a92da626c8934689b963d662b4101402?sid=562224d4-2048-4072-98e3-f7dc769570b8
+A proposta de produção individual será de um Mini Banco de dados de Livros e Filmes que recomendará entre um filme ou um livro para o usuário e a linguagem utilizada será Haskell. A partir de agora será explicado o código realizado pelo aluno Vitor Mateus Romancini do Amaral. 
+Link para o screencast: https://www.loom.com/share/a92da626c8934689b963d662b4101402?sid=562224d4-2048-4072-98e3-f7dc769570b8
 
 ```haskell
 import System.Random
