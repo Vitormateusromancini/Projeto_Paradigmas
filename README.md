@@ -155,3 +155,9 @@ Vale ressaltar para as duas últimas linhas que exibem o título de recomendaç�
 
 Sobre o trabalho foi bem desafiador usar a linguagem haskell comparado a Prolog já que eu não tinha mexido ainda com a linguagem com relação escolher aleatoriamente uma string numa lista. O principal desafio em questão foi resolver um problema de importação de biblioteca que foi resolvida com auxílio da professora. 
 
+Referências:
+
+Biblioteca System.Random: https://hackage.haskell.org/package/random-1.2.1.1/docs/System-Random.html
+Inf UFPR: https://www.inf.ufpr.br/andrey/ci062/ProgramacaoHaskell.pdf
+DECOM - UFOP: http://www.decom.ufop.br/romildo/2018-1/bcc222/slides/progfunc.pdf
+UFMG: https://homepages.dcc.ufmg.br/~camarao/fp/haskell.pdf
